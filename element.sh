@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# PSQL="psql --username=freecodecamp --dbname=periodic_table -t --no-align -c"
+PSQL="psql --username=freecodecamp --dbname=periodic_table -t --no-align -c"
 
 # Check if argument was passed
 if [[ -z $1 ]]; then
@@ -16,3 +16,10 @@ elif [[ $1 =~ ^[A-Z][a-z]?$ ]]; then
 else
   CONDITION="name='$1'"
 fi
+
+# Query the database
+ELEMENT=$($PSQL "SELECT atomic_number, name, symbol, type, atomic_mass, melting_point_celsius, boiling_point_celsius 
+  FROM elements 
+  JOIN properties USING(atomic_number) 
+  JOIN types USING(type_id) 
+  WHERE $CONDITION;")
