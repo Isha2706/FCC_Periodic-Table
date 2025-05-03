@@ -23,3 +23,11 @@ ELEMENT=$($PSQL "SELECT atomic_number, name, symbol, type, atomic_mass, melting_
   JOIN properties USING(atomic_number) 
   JOIN types USING(type_id) 
   WHERE $CONDITION;")
+
+# Check result
+if [[ -z $ELEMENT ]]; then
+  echo "I could not find that element in the database."
+else
+  IFS='|' read -r ATOMIC_NUMBER NAME SYMBOL TYPE MASS MELT BOIL <<< "$ELEMENT"
+  echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a $TYPE, with a mass of $MASS amu. $NAME has a melting point of $MELT celsius and a boiling point of $BOIL celsius."
+fi
