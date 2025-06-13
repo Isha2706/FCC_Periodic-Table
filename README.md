@@ -38,17 +38,17 @@ The `periodic_table` database includes the following tables:
 
 ## ▶️ How to Run
 
-1. Setup the Database
+### 1. Setup the Database
    ```bash
    psql -U postgres -f periodic_table.sql
    ```
 
-2. Make the Bash Script Executable
+### 2. Make the Bash Script Executable
    ```bash
    chmod +x element.sh
    ```
 
-3. Run the Script
+### 3. Run the Script
    ```bash
    ./element.sh 10        # using atomic number
    ./element.sh Ne        # using symbol
